@@ -13,18 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\MahasiswaController;
+
+Route::get('mahasiswa/tampil', [MahasiswaController::class, 'tampilMahasiswa'])->name('tampilMahasiswa')->middleware('auth');
+
+Route::get('mahasiswa/tambah', [MahasiswaController::class, 'tambahMahasiswa'])->name('tambahMahasiswa')->middleware('auth');
+
+Route::post('mahasiswa/simpan', [MahasiswaController::class, 'simpanMahasiswa'])->name('simpanMahasiswa')->middleware('auth');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/awal', function () {
-    return view('index');
+Route::get('/form', function () {
+    return view('form');
 });
 
 Route::get('/login-test', function () {
     return view('login-test');
 });
 
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('mahasiswa/simpan', [MahasiswaController::class, 'simpanMahasiswa'])->name('simpanMahasiswa')->middleware('auth');
